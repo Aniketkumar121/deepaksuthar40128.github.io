@@ -5,7 +5,7 @@ body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.width = 0;
 body__info[1].style.left = 0;
-let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0,song_map =[],song_img=[];
+let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0, song_map = [], song_img = [];
 let ele = document.getElementById('file');
 let menu = document.getElementsByClassName('menu')[0];
 let options = document.getElementsByClassName('menu')[3];
@@ -52,7 +52,7 @@ body__cover[4].addEventListener('click', (e) => {
 function load_song() {
     for (let i = 0; i < ele.files.length; i++) {
         let myfile = ele.files[i];
-        myfile = new File([myfile], `${ myfile.name }` + ".mp3", {
+        myfile = new File([myfile], `${myfile.name}` + ".mp3", {
             type: "audio/mp3",
             lastModified: new Date(),
         });
@@ -120,16 +120,20 @@ function play_music() {
     }
 
     control_btn[1].children[0].innerHTML = '<i class="fa fa-pause"></i>';
-    xx =  line_width / Music.duration;
-    xx /= 10;
-    timeint = 0;
-    timeint = setInterval(() => {
-        body__cover[3].setAttribute('title', parseInt(Music.currentTime));
-        body__cover[3].style.left = (parseFloat(body__cover[3].style.left) + xx) + 'px';
-        body__cover[4].style.width = (parseFloat(body__cover[4].style.width) + xx) + 'px';
-    }, 100);
+    let hello = setInterval(() => {
+        if (Music.duration) {
+            clearInterval(hello);
+            xx = line_width / Music.duration;
+            xx /= 10;
+            timeint = setInterval(() => {
+                body__cover[3].setAttribute('title', parseInt(Music.currentTime));
+                body__cover[3].style.left = (parseFloat(body__cover[3].style.left) + xx) + 'px';
+                body__cover[4].style.width = (parseFloat(body__cover[4].style.width) + xx) + 'px';
+            }, 100);
 
-    Music.play();
+            Music.play();
+        }
+    }, 10);
 
     Music.addEventListener('ended', () => {
         next_music();
@@ -163,7 +167,7 @@ function next_music() {
         Music = new Audio(music_list[song_map[Music_index]]);
         setTimeout(() => {
             play_music();
-        }, 100);
+        }, 200);
     }
 }
 
