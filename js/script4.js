@@ -12,6 +12,7 @@ function shuffle() {
     song_map = shuffleArray(song_map);
     Music_index = 0;
     Music = new Audio(music_list[song_map[Music_index]]);
+    body__cover[1].src = song_img[song_map[Music_index]] == '*' ? 'img/helo.jpg' : song_img[song_map[Music_index]];
     load_song_complete();
     show_menu(); show_playlist();
 }

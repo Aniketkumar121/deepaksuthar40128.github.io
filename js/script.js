@@ -5,7 +5,7 @@ body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.width = 0;
 body__info[1].style.left = 0;
-let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0,song_map =[];
+let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0,song_map =[],song_img=[];
 let ele = document.getElementById('file');
 let menu = document.getElementsByClassName('menu')[0];
 let options = document.getElementsByClassName('menu')[3];
@@ -30,7 +30,6 @@ control_btn[1].addEventListener('click', () => {
     else pause_music();
 })
 
-
 body__cover[2].addEventListener('click', (e) => {
     if (playlist.length == 0) {
         show_error('list is empty <span onclick="error_handle()" style="color: blue;cursor: pointer;">click me</span> and Load songs');
@@ -52,6 +51,15 @@ body__cover[4].addEventListener('click', (e) => {
 
 function load_song() {
     for (let i = 0; i < ele.files.length; i++) {
+        let myfile = ele.files[i];
+
+
+        myfile = new File([myfile], `${ myfile.name }` + ".mp3", {
+            type: "audio/mp3",
+            lastModified: new Date(),
+        });
+
+
         const reader = new FileReader();
         let temp_music;
         reader.onload = function () {
@@ -59,18 +67,19 @@ function load_song() {
             music_list[i] = str;
             // console.log(music_list[i]);
         };
-        reader.readAsDataURL(ele.files[i]);
-        music_list[i] = ele.files[i];
+        reader.readAsDataURL(myfile);
         playlist[i] = ele.files[i].name;
         // console.log(music_list[i]);
     }
     map_song();
     run_test();
+    process_song_img();
 }
 
 function run_test() {
     setTimeout(() => {
         Music = new Audio(music_list[song_map[Music_index]]);
+        body__cover[1].src = song_img[song_map[Music_index]] == '*' ? 'img/helo.jpg' : song_img[song_map[Music_index]];
         let new_song_name = song_name(playlist[song_map[Music_index]]);
         document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
         menu.children[2].children[1].children[3].children[1].innerText = playlist.length;
@@ -87,6 +96,7 @@ function load_song_complete() {
     for (let ii = 0; ii < music_list.length; ii++) {
         songs.innerHTML += `<div class="song" id="${ii}">${playlist[song_map[ii]]}</div>`
     }
+   
     Array.from(songs.children).forEach(song_key => {
         song_key.addEventListener('click', () => {
             play_musicNum(parseInt(song_key.getAttribute('id')));
@@ -95,6 +105,7 @@ function load_song_complete() {
 }
 
 function play_music() {
+    console.log(song_img);
     if (playlist.length == 0) {
         show_error('list is empty <span onclick="error_handle()" style="color: blue;cursor: pointer;">click me</span> and Load songs');
         return;
@@ -103,6 +114,7 @@ function play_music() {
     document.getElementById(Music_index).style.color = 'red';
     let new_song_name = song_name(playlist[song_map[Music_index]]);
     document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
+    body__cover[1].src = song_img[song_map[Music_index]] == '*' ? 'img/helo.jpg' : song_img[song_map[Music_index]];
     if (flag)
         run_song_name();
     if (Music.currentTime >= Music.duration) {
@@ -224,6 +236,7 @@ function songs_end() {
         Music = new Audio(music_list[song_map[Music_index]]);
         let new_song_name = song_name(playlist[Music_index]);
         document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
+        body__cover[1].src = song_img[song_map[Music_index]] == '*' ? 'img/helo.jpg' : song_img[song_map[Music_index]];
         return 0;
     }
     return 1;
