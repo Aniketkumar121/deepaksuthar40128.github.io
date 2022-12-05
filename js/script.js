@@ -13,7 +13,7 @@ let songs = document.getElementsByClassName('songs')[0];
 let playlist_ele = menu.parentElement.children[2];
 let settings_ele = menu.parentElement.children[3];
 let semaphore = 1;
-
+let line_width = body__cover[2].clientWidth;
 
 ele.addEventListener('change', () => {
     load_song();
@@ -52,29 +52,25 @@ body__cover[4].addEventListener('click', (e) => {
 function load_song() {
     for (let i = 0; i < ele.files.length; i++) {
         let myfile = ele.files[i];
-
-
         myfile = new File([myfile], `${ myfile.name }` + ".mp3", {
             type: "audio/mp3",
             lastModified: new Date(),
         });
-
-
         const reader = new FileReader();
         let temp_music;
         reader.onload = function () {
             var str = this.result;
             music_list[i] = str;
-            // console.log(music_list[i]);
         };
         reader.readAsDataURL(myfile);
         playlist[i] = ele.files[i].name;
-        // console.log(music_list[i]);
     }
     map_song();
     run_test();
     process_song_img();
 }
+
+
 
 function run_test() {
     setTimeout(() => {
@@ -96,7 +92,6 @@ function load_song_complete() {
     for (let ii = 0; ii < music_list.length; ii++) {
         songs.innerHTML += `<div class="song" id="${ii}">${playlist[song_map[ii]]}</div>`
     }
-   
     Array.from(songs.children).forEach(song_key => {
         song_key.addEventListener('click', () => {
             play_musicNum(parseInt(song_key.getAttribute('id')));
@@ -104,8 +99,9 @@ function load_song_complete() {
     })
 }
 
+
+
 function play_music() {
-    console.log(song_img);
     if (playlist.length == 0) {
         show_error('list is empty <span onclick="error_handle()" style="color: blue;cursor: pointer;">click me</span> and Load songs');
         return;
@@ -122,16 +118,18 @@ function play_music() {
         body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
         body__cover[4].style.width = 0;
     }
-    Music.play();
-    control_btn[1].children[0].innerHTML = '<i class="fa fa-pause"></i>';
-    xx = body__cover[2].clientWidth / Music.duration;
-    xx /= 10;
 
+    control_btn[1].children[0].innerHTML = '<i class="fa fa-pause"></i>';
+    xx =  line_width / Music.duration;
+    xx /= 10;
+    timeint = 0;
     timeint = setInterval(() => {
         body__cover[3].setAttribute('title', parseInt(Music.currentTime));
         body__cover[3].style.left = (parseFloat(body__cover[3].style.left) + xx) + 'px';
         body__cover[4].style.width = (parseFloat(body__cover[4].style.width) + xx) + 'px';
     }, 100);
+
+    Music.play();
 
     Music.addEventListener('ended', () => {
         next_music();
@@ -147,6 +145,7 @@ function pause_music() {
     clearInterval(song_int);
     clearInterval(timeint);
 }
+
 
 
 function next_music() {
@@ -169,6 +168,7 @@ function next_music() {
 }
 
 
+
 function previous_music() {
     if (playlist.length == 0) {
         show_error('list is empty <span onclick="error_handle()" style="color: blue;cursor: pointer;">click me</span> and Load songs');
@@ -187,14 +187,15 @@ function previous_music() {
 }
 
 
+
 function seek_music(point) {
     let yy = point - body__cover[3].getBoundingClientRect().left;
     let zz = point - body__cover[2].getBoundingClientRect().left;
     body__cover[3].style.left = (parseFloat(body__cover[3].style.left) + yy) + 'px';
     body__cover[4].style.width = (parseFloat(body__cover[4].style.width) + yy) + 'px';
     Music.currentTime = (Music.duration / body__cover[2].clientWidth) * zz;
-    console.log((Music.duration / body__cover[2].clientWidth) * zz);
 }
+
 
 
 function play_musicNum(x) {
@@ -210,12 +211,14 @@ function play_musicNum(x) {
 }
 
 
+
 function replay() {
     body__info[1].style.left = 0;
     Music.currentTime = 0;
     body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
     body__cover[4].style.width = 0;
 }
+
 
 
 function songs_end() {
