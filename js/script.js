@@ -120,20 +120,18 @@ function play_music() {
     }
 
     control_btn[1].children[0].innerHTML = '<i class="fa fa-pause"></i>';
-    let hello = setInterval(() => {
-        if (Music.duration) {
-            clearInterval(hello);
-            xx = line_width / Music.duration;
-            xx /= 10;
-            timeint = setInterval(() => {
-                body__cover[3].setAttribute('title', parseInt(Music.currentTime));
-                body__cover[3].style.left = (parseFloat(body__cover[3].style.left) + xx) + 'px';
-                body__cover[4].style.width = (parseFloat(body__cover[4].style.width) + xx) + 'px';
-            }, 100);
 
-            Music.play();
-        }
-    }, 10);
+    console.log(Music.duration);
+    let song_length = Music.duration;
+    console.log(song_length);
+    xx = line_width / song_length;
+    xx /= 10;
+    timeint = setInterval(() => {
+        body__cover[3].setAttribute('title', parseInt(Music.currentTime));
+        body__cover[3].style.left = (parseFloat(body__cover[3].style.left) + xx) + 'px';
+        body__cover[4].style.width = (parseFloat(body__cover[4].style.width) + xx) + 'px';
+    }, 100);
+    Music.play();
 
     Music.addEventListener('ended', () => {
         next_music();
@@ -167,7 +165,7 @@ function next_music() {
         Music = new Audio(music_list[song_map[Music_index]]);
         setTimeout(() => {
             play_music();
-        }, 200);
+        }, 1000);
     }
 }
 
@@ -184,10 +182,10 @@ function previous_music() {
     temp_count = 0;
     timeint = -1;
     Music_index--;
-    Music = new Audio('/songs/' + playlist[Music_index]);
+    Music = new Audio(music_list[song_map[Music_index]]);
     setTimeout(() => {
         play_music();
-    }, 100);
+    }, 1000);
 }
 
 
