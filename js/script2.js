@@ -35,6 +35,7 @@ window.addEventListener('click', (e) => {
 
 
 function show_menu() {
+    feed_user();
     menu.classList.add('menu_show');
 }
 
@@ -106,7 +107,7 @@ function close_double_window() {
 let error_ele = document.getElementsByClassName('demo-preview')[0];
 function show_error(mytext) {
     console.log(mytext)
-    error_ele.style.zIndex = 5;
+    error_ele.style.zIndex = 7;
     error_ele.children[0].children[2].innerHTML = mytext;
     error_music = new Audio('/error_songs/Alarm0' + error_song + '.wav');
     error_music.play();

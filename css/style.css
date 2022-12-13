@@ -72,23 +72,20 @@ a {
     height: 20px;
 }
 
-.user {
-    height: 60px;
-}
-
 .tag {
     font-size: 12px;
+    width: max-content;
     margin: 10px 0px 0px 10px;
 }
 
-.playlist ul {
+.playlist ul,.user ul {
     display: flex;
     flex-direction: column;
     cursor: pointer;
     padding: 0;
 }
 
-.playlist ul li {
+.playlist ul li,.user ul li {
     list-style: none;
     padding: 10px;
     height: 40px;
@@ -112,7 +109,7 @@ a {
     margin-bottom: 10px;
 }
 
-.song i {
+.song i,.user ul li i {
     font-size: 15px;
     margin-right: 6px;
 }
@@ -122,7 +119,7 @@ a {
 }
 
 .playlist ul li:hover,
-.song:hover {
+.song:hover,.user ul li:hover {
     background-color: white;
     color: red;
 }
