@@ -125,4 +125,22 @@ function feed_option_content(number) {
     </div>`
         mark_defult(font_index);
     }
+    else if (number == 4) {
+        options.innerHTML = `<div class="header" style="background-color: #2196f3;">
+        <div class="name_com">Font Family</div>
+        <div class="cancel" onclick="close_option()"><svg class="w-6 h-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"></path>
+            </svg></div>
+    </div>
+    <div class="songs" style="text-align: center;">
+     </div >`
+        for (let i = 0; i < localStorage.length; i++) {
+            let data = localStorage.getItem("data-" + i);
+            data = JSON.parse(data);
+            options.children[1].innerHTML += `<div onclick="font_action(0)" class="song">${data.username}</div>`
+        }
+        mark_defult(main_user);
+    }
 }

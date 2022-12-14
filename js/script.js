@@ -5,7 +5,7 @@ body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.width = 0;
 body__info[1].style.left = 0;
-let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0, song_map = [], song_img = [],signed = false;
+let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0, song_map = [], song_img = [], signed = true, main_user = 0, total_account = 0;
 let ele = document.getElementById('file');
 let menu = document.getElementsByClassName('menu')[0];
 let songs = document.getElementsByClassName('songs')[0];
@@ -14,6 +14,7 @@ let settings_ele = menu.parentElement.children[3];
 let options = menu.parentElement.children[4];
 let signin = menu.parentElement.children[5];
 let signup = menu.parentElement.children[6];
+let user_pro = menu.parentElement.children[7];
 let semaphore = 1;
 let line_width = body__cover[2].clientWidth;
 
@@ -211,7 +212,7 @@ function play_musicNum(x) {
     Music = new Audio(music_list[song_map[Music_index]]);
     setTimeout(() => {
         play_music();
-    }, 100);
+    }, 500);
 }
 
 

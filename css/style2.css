@@ -118,6 +118,7 @@
     font-size: 13px;
     align-items: center;
     margin: 1rem 0rem 1rem 0rem;
+    cursor: pointer;
 }
 
 .user-pic {

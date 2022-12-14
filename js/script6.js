@@ -4,13 +4,10 @@ let user = document.getElementById('user');
 function feed_user() {
     let data = JSON.parse(localStorage.getItem('data'));
     if (signed) {
-        user.innerHTML = ` <div class="user-show">
-                            <div class="user-pic"><img src="${data.user_profile}" alt="user" id="menu-pic"></div>
+        user.innerHTML = ` <div onclick="show_user_profile()" class="user-show">
+                            <div class="user-pic"><img src="${data.user_profile != '*' ? data.user_profile:"img/fake_user.jpg"}" alt="user" id="menu-pic"></div>
                             <div class="username">${data.username}</div>
                         </div>
-                        <ul>
-                         <li class="options" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</li>
-                        </ul>
                         `
     }
     else {
@@ -100,8 +97,38 @@ function logout() {
     signed = false;
     setTimeout(() => {
         show_menu();
+        show_settings();
+        show_settings();
     }, 500);
 }
+
+
+function show_user_profile() {
+    setTimeout(() => {
+        user_pro.classList.add('my-playlist');
+        setTimeout(() => {
+            user_pro.classList.add('full-width');
+            setTimeout(() => {
+                feed_user_profile(main_user);
+                user_pro.children[1].classList.remove('login');
+            }, 500);
+        }, 500);
+    }, 200);
+
+}
+
+
+function close_user_profile() {
+    user_pro.children[1].classList.add('login');
+    setTimeout(() => {
+        user_pro.classList.remove('full-width');
+        setTimeout(() => {
+            user_pro.classList.remove('my-playlist');
+            show_menu();
+        }, 500);
+    }, 500);
+}
+
 
 let img_data = "*";
 let ele4 = document.getElementById('user-img');

@@ -54,15 +54,46 @@ function show_playlist() {
 function show_settings() {
     if (playlist_ele.classList.length > 1)
         close_single_window();
-    if (settings_ele.classList.length > 1)
+    if (settings_ele.classList.length > 1) {
+        settings_ele.children[1].innerHTML = '';
         settings_ele.classList.remove('my-playlist');
-    else
+    }
+    else {
         settings_ele.classList.add('my-playlist');
+        setTimeout(() => {
+
+
+            if (signed) {
+                settings_ele.children[1].innerHTML = ` <div onclick="show_option(0)" class="song"><i class="fa fa-bell-o" aria-hidden="true"></i>Error
+                        Tones</div>
+                    <div onclick="show_option(1)" class="song"><i class="fa fa-paint-brush" aria-hidden="true"></i>App
+                        Colour</div>
+                    <div onclick="show_option(2)" class="song"><i class="fa fa-refresh" aria-hidden="true"></i>Reapet
+                        Status</div>
+                    <div onclick="show_option(3)" class="song"><i class="fa fa-font" aria-hidden="true"></i>Font-family
+                    </div>
+             <div onclick="logout()" class="song"><i class="fa fa-sign-out" aria-hidden="true"></i>LogOut</div>
+                    <div onclick="show_option(4)" class="song"><i class="fa fa-group" aria-hidden="true"></i>Other Accounts</div>`
+            }
+            else {
+                settings_ele.children[1].innerHTML = ` <div onclick="show_option(0)" class="song"><i class="fa fa-bell-o" aria-hidden="true"></i>Error
+                        Tones</div>
+                    <div onclick="show_option(1)" class="song"><i class="fa fa-paint-brush" aria-hidden="true"></i>App
+                        Colour</div>
+                    <div onclick="show_option(2)" class="song"><i class="fa fa-refresh" aria-hidden="true"></i>Reapet
+                        Status</div>
+                    <div onclick="show_option(3)" class="song"><i class="fa fa-font" aria-hidden="true"></i>Font-family
+                    </div>`
+            }
+        }, 500);
+    }
 }
 
 function show_option(number) {
-    feed_option_content(number);
     options.classList.add('menu_show');
+    setTimeout(() => {
+        feed_option_content(number);
+    }, 500);
 }
 
 function close_option() {
