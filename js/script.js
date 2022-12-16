@@ -5,7 +5,7 @@ body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.width = 0;
 body__info[1].style.left = 0;
-let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0, song_map = [], song_img = [], signed = true, main_user = 0, total_account = 0;
+let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0, song_map = [], song_img = [], signed = false, main_user = -1, total_account = 0;
 let ele = document.getElementById('file');
 let menu = document.getElementsByClassName('menu')[0];
 let songs = document.getElementsByClassName('songs')[0];

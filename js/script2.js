@@ -83,7 +83,9 @@ function show_settings() {
                     <div onclick="show_option(2)" class="song"><i class="fa fa-refresh" aria-hidden="true"></i>Reapet
                         Status</div>
                     <div onclick="show_option(3)" class="song"><i class="fa fa-font" aria-hidden="true"></i>Font-family
-                    </div>`
+                    </div>
+                    <div onclick="show_option(4)" class="song"><i class="fa fa-group" aria-hidden="true"></i>All Accounts</div>
+                    `
             }
         }, 500);
     }
@@ -91,9 +93,7 @@ function show_settings() {
 
 function show_option(number) {
     options.classList.add('menu_show');
-    setTimeout(() => {
         feed_option_content(number);
-    }, 500);
 }
 
 function close_option() {

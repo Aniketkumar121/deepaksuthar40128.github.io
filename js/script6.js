@@ -2,10 +2,10 @@ let words = ['music', 'fashion', 'fun', 'feeling', 'love', 'attraction', 'happin
 
 let user = document.getElementById('user');
 function feed_user() {
-    let data = JSON.parse(localStorage.getItem('data'));
     if (signed) {
-        user.innerHTML = ` <div onclick="show_user_profile()" class="user-show">
-                            <div class="user-pic"><img src="${data.user_profile != '*' ? data.user_profile:"img/fake_user.jpg"}" alt="user" id="menu-pic"></div>
+        let data = JSON.parse(localStorage.getItem('data-' + main_user));
+        user.innerHTML = ` <div onclick="show_user_profile(${main_user})" class="user-show">
+                            <div class="user-pic"><img src="${data.user_profile != '*' ? data.user_profile : "img/fake_user.jpg"}" alt="user" id="menu-pic"></div>
                             <div class="username">${data.username}</div>
                         </div>
                         `
@@ -95,6 +95,7 @@ function goto_logup() {
 
 function logout() {
     signed = false;
+    main_user = -1;
     setTimeout(() => {
         show_menu();
         show_settings();
@@ -103,13 +104,13 @@ function logout() {
 }
 
 
-function show_user_profile() {
+function show_user_profile(num) {
     setTimeout(() => {
         user_pro.classList.add('my-playlist');
         setTimeout(() => {
             user_pro.classList.add('full-width');
             setTimeout(() => {
-                feed_user_profile(main_user);
+                feed_user_profile(num);
                 user_pro.children[1].classList.remove('login');
             }, 500);
         }, 500);
