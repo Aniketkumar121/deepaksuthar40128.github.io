@@ -98,7 +98,7 @@ a {
 
 .song {
     padding: 10px;
-    height: 40px;
+    height: max-content;
     font-size: 13px;
     display: flex;
     align-items: center;
