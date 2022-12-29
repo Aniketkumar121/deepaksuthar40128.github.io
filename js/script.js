@@ -112,6 +112,7 @@ function play_music() {
     load_song_complete();
     document.getElementById(Music_index).style.color = 'red';
     let new_song_name = song_name(playlist[song_map[Music_index]]);
+    setnotificationMetadata(playlist[song_map[Music_index]]);
     document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
     body__cover[1].src = song_img[song_map[Music_index]] == '*' ? 'img/helo.jpg' : song_img[song_map[Music_index]];
     if (flag)
