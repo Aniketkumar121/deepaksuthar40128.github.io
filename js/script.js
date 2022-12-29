@@ -112,7 +112,7 @@ function play_music() {
     load_song_complete();
     document.getElementById(Music_index).style.color = 'red';
     let new_song_name = song_name(playlist[song_map[Music_index]]);
-   
+    // setnotificationMetadata(playlist[song_map[Music_index]]);
     document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
     body__cover[1].src = song_img[song_map[Music_index]] == '*' ? 'img/helo.jpg' : song_img[song_map[Music_index]];
     if (flag)
@@ -167,9 +167,9 @@ function next_music() {
     Music_index++;
     if (songs_end()) {
         Music = new Audio(music_list[song_map[Music_index]]);
-        setTimeout(() => {
+        Music.onloadedmetadata = function () {
             play_music();
-        }, 1000);
+        }
     }
 }
 
@@ -187,9 +187,9 @@ function previous_music() {
     timeint = -1;
     Music_index--;
     Music = new Audio(music_list[song_map[Music_index]]);
-    setTimeout(() => {
+    Music.onloadedmetadata = function () {
         play_music();
-    }, 1000);
+    }
 }
 
 
@@ -211,9 +211,9 @@ function play_musicNum(x) {
     timeint = -1;
     Music_index = x;
     Music = new Audio(music_list[song_map[Music_index]]);
-    setTimeout(() => {
+    Music.onloadedmetadata = function () {
         play_music();
-    }, 500);
+    }
 }
 
 
