@@ -46,3 +46,12 @@ navigator.mediaSession.setActionHandler('nexttrack', () => {
 navigator.mediaSession.setActionHandler('previoustrack', () => {
     previous_music();
 })
+function setnotificationMetadata(song_name) {
+    img_data = document.getElementById('main-img').getAttribute('src');
+    navigator.mediaSession.metadata = new MediaMetadata({
+        title: song_name,
+        artwork: [
+            { src: img_data,  type: 'image/png' },
+        ]
+    });
+}
