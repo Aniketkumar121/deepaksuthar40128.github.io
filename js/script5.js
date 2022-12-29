@@ -34,24 +34,26 @@ function process_song_img() {
 }
 
 
-navigator.mediaSession.setActionHandler('play', () => {
-    play_music();
-})
-navigator.mediaSession.setActionHandler('pause', () => {
-    pause_music();
-})
-navigator.mediaSession.setActionHandler('nexttrack', () => {
-    next_music();
-})
-navigator.mediaSession.setActionHandler('previoustrack', () => {
-    previous_music();
-})
 function setnotificationMetadata(song_name) {
-    img_data = document.getElementById('main-img').getAttribute('src');
-    navigator.mediaSession.metadata = new MediaMetadata({
-        title: song_name,
-        artwork: [
-            { src: img_data,  type: 'image/png' },
-        ]
-    });
+    navigator.mediaSession.setActionHandler('play', () => {
+        play_music();
+    })
+    navigator.mediaSession.setActionHandler('pause', () => {
+        pause_music();
+    })
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+        next_music();
+    })
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+        previous_music();
+    })
+    if ('mediaSession' in navigator) {
+        img_data = document.getElementById('main-img').getAttribute('src');
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: song_name,
+            artwork: [
+                { src: img_data, type: 'image/png' },
+            ]
+        });
+    }
 }
