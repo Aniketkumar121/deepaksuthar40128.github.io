@@ -112,7 +112,6 @@ function play_music() {
     load_song_complete();
     document.getElementById(Music_index).style.color = 'red';
     let new_song_name = song_name(playlist[song_map[Music_index]]);
-     setnotificationMetadata(playlist[song_map[Music_index]]);
     document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
     body__cover[1].src = song_img[song_map[Music_index]] == '*' ? 'img/helo.jpg' : song_img[song_map[Music_index]];
     if (flag)
@@ -122,7 +121,7 @@ function play_music() {
         body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
         body__cover[4].style.width = 0;
     }
-
+    setnotificationMetadata(playlist[song_map[Music_index]]);
     control_btn[1].children[0].innerHTML = '<i class="fa fa-pause"></i>';
 
     console.log(Music.duration);
