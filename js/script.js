@@ -134,7 +134,7 @@ function play_music() {
         body__cover[3].style.left = (parseFloat(body__cover[3].style.left) + xx) + 'px';
         body__cover[4].style.width = (parseFloat(body__cover[4].style.width) + xx) + 'px';
     }, 100);
-    Music.play();
+    Music.play({inline: true});
 
     Music.addEventListener('ended', () => {
         next_music();
